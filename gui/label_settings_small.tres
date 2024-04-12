@@ -1,0 +1,7 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://bxoy805gkpher"]
+
+[ext_resource type="FontFile" uid="uid://bby7breuoihqa" path="res://gui/DarumadropOne-Regular.ttf" id="1_j53ly"]
+
+[resource]
+font = ExtResource("1_j53ly")
+font_size = 20

@@ -1,0 +1,112 @@
+[gd_scene load_steps=7 format=3 uid="uid://cr3xssk1bdp5u"]
+
+[ext_resource type="Script" path="res://autoload/DialogOverlay/DialogOverlay.gd" id="1_r3xnr"]
+[ext_resource type="Texture2D" uid="uid://vx504hxoffk6" path="res://autoload/DialogOverlay/portrait_2.png" id="2_8q5f7"]
+[ext_resource type="Texture2D" uid="uid://tlhush64wg5d" path="res://autoload/DialogOverlay/portrait_1.png" id="2_lashl"]
+[ext_resource type="AudioStream" uid="uid://t0r27aioflcr" path="res://autoload/DialogOverlay/dialog.wav" id="4_4d7va"]
+[ext_resource type="AudioStream" uid="uid://hmidyqe0mm2j" path="res://autoload/DialogOverlay/text-bubble-geht-auf.wav" id="5_11emc"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ssckm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_lashl")
+}],
+"loop": true,
+"name": &"chef",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": null
+}],
+"loop": true,
+"name": &"scream",
+"speed": 5.0
+}]
+
+[node name="DialogOverlay" type="Control"]
+process_mode = 3
+z_index = 10
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_r3xnr")
+metadata/_edit_horizontal_guides_ = [360.0]
+metadata/_edit_vertical_guides_ = [640.0]
+
+[node name="Backdrop" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 828.0
+offset_bottom = 441.0
+mouse_filter = 2
+color = Color(0, 0, 0, 0.192157)
+
+[node name="prof" type="Node2D" parent="."]
+
+[node name="Portrait" type="Sprite2D" parent="prof"]
+position = Vector2(540, 243)
+scale = Vector2(2, 2)
+texture = ExtResource("2_8q5f7")
+
+[node name="Panel" type="Panel" parent="prof"]
+offset_left = 17.0
+offset_top = 253.0
+offset_right = 487.0
+offset_bottom = 348.0
+mouse_filter = 2
+metadata/_edit_group_ = true
+
+[node name="Speech" type="Label" parent="prof/Panel"]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 10.0
+offset_right = 453.0
+offset_bottom = 84.0
+text = "This is a standard text!"
+autowrap_mode = 3
+visible_characters_behavior = 1
+
+[node name="chef" type="Node2D" parent="."]
+visible = false
+
+[node name="Portrait" type="AnimatedSprite2D" parent="chef"]
+position = Vector2(92, 243)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_ssckm")
+animation = &"chef"
+
+[node name="Panel" type="Panel" parent="chef"]
+offset_left = 148.0
+offset_top = 253.0
+offset_right = 618.0
+offset_bottom = 348.0
+mouse_filter = 2
+metadata/_edit_group_ = true
+
+[node name="Speech" type="Label" parent="chef/Panel"]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 10.0
+offset_right = 453.0
+offset_bottom = 84.0
+text = "This is a standard text!"
+autowrap_mode = 3
+visible_characters_behavior = 1
+
+[node name="SkipButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 538.0
+offset_top = 17.0
+offset_right = 623.0
+offset_bottom = 48.0
+text = "Skip"
+
+[node name="Dialog" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_4d7va")
+
+[node name="Text_bubble" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_11emc")
+volume_db = -3.0
+
+[connection signal="pressed" from="SkipButton" to="." method="_on_skip_button_pressed"]
+[connection signal="finished" from="Dialog" to="." method="_on_dialog_finished"]

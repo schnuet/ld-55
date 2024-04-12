@@ -1,0 +1,88 @@
+[gd_scene load_steps=6 format=3 uid="uid://dlysit4dy8gap"]
+
+[ext_resource type="Script" path="res://screens/CreditsScreen/CreditsScreen.gd" id="1_cyvqq"]
+[ext_resource type="Texture2D" uid="uid://uuv08tg3qcj5" path="res://screens/CreditsScreen/space_garden_endscreen.png" id="2_mukfy"]
+[ext_resource type="LabelSettings" uid="uid://ccrc5drs0nt3v" path="res://gui/titles_1.tres" id="3_ho27y"]
+[ext_resource type="LabelSettings" uid="uid://ditbrm271efp8" path="res://gui/label_settings_medium.tres" id="4_goqij"]
+[ext_resource type="FontFile" uid="uid://b2jbl0piinbrn" path="res://assets/fonts/MunroSmall-wPZw.ttf" id="5_qdyo1"]
+
+[node name="CreditsScreen" type="Node2D"]
+script = ExtResource("1_cyvqq")
+
+[node name="SpaceGardenEndscreen" type="Sprite2D" parent="."]
+texture = ExtResource("2_mukfy")
+centered = false
+
+[node name="CodeCredits" type="Node2D" parent="."]
+visible = false
+position = Vector2(0, 113)
+
+[node name="Code" type="Label" parent="CodeCredits"]
+offset_left = 52.0
+offset_top = 43.0
+offset_right = 181.0
+offset_bottom = 134.0
+text = "Code"
+label_settings = ExtResource("3_ho27y")
+
+[node name="Ntimi Schnütgen" type="Label" parent="CodeCredits"]
+offset_left = 57.0
+offset_top = 115.0
+offset_right = 266.0
+offset_bottom = 162.0
+text = "Ntimi Schnütgen
+"
+label_settings = ExtResource("4_goqij")
+
+[node name="Characters and World" type="Node2D" parent="."]
+visible = false
+position = Vector2(0, 2)
+
+[node name="Characters and World" type="Label" parent="Characters and World"]
+offset_left = 52.0
+offset_top = 43.0
+offset_right = 181.0
+offset_bottom = 134.0
+text = "Character and World Design"
+label_settings = ExtResource("3_ho27y")
+
+[node name="Hendrik Schnütgen" type="Label" parent="Characters and World"]
+offset_left = 57.0
+offset_top = 115.0
+offset_right = 266.0
+offset_bottom = 162.0
+text = "Hendrik Schnütgen
+"
+label_settings = ExtResource("4_goqij")
+
+[node name="Music" type="Node2D" parent="."]
+visible = false
+position = Vector2(0, 234)
+
+[node name="Music" type="Label" parent="Music"]
+offset_left = 52.0
+offset_top = 43.0
+offset_right = 181.0
+offset_bottom = 134.0
+text = "Music"
+label_settings = ExtResource("3_ho27y")
+
+[node name="Stefan Hofer" type="Label" parent="Music"]
+offset_left = 57.0
+offset_top = 115.0
+offset_right = 266.0
+offset_bottom = 162.0
+text = "Stefan Hofer
+"
+label_settings = ExtResource("4_goqij")
+
+[node name="BackButton" type="Button" parent="."]
+offset_left = 536.0
+offset_top = 320.0
+offset_right = 621.0
+offset_bottom = 341.0
+theme_override_fonts/font = ExtResource("5_qdyo1")
+theme_override_font_sizes/font_size = 10
+text = "Back to Start"
+
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]

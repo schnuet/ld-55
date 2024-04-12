@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://fbk1capf22s7"]
+
+[ext_resource type="Script" path="res://scenes/MainScene/MainScene.gd" id="1_ggjwf"]
+[ext_resource type="PackedScene" uid="uid://dpmdaai7cmful" path="res://components/Clickable.tscn" id="2_eu7lg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6om6c"]
+size = Vector2(141, 100)
+
+[node name="MainScene" type="Node2D"]
+script = ExtResource("1_ggjwf")
+metadata/_edit_vertical_guides_ = [640.0]
+metadata/_edit_horizontal_guides_ = [360.0]
+
+[node name="LeaveHotspot" parent="." instance=ExtResource("2_eu7lg")]
+position = Vector2(314, 54)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeaveHotspot"]
+shape = SubResource("RectangleShape2D_6om6c")
+metadata/_edit_lock_ = true
+
+[connection signal="click" from="LeaveHotspot" to="." method="_on_leave_hotspot_click"]

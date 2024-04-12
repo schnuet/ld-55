@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3 uid="uid://fbk1capf22s7"]
+
+[ext_resource type="PackedScene" uid="uid://d0t1lcxkscwua" path="res://scenes/PlantMap/PlantMap.tscn" id="1_7vaon"]
+[ext_resource type="PackedScene" uid="uid://5cygv1orl3un" path="res://scenes/PlantButton/PlantButton.tscn" id="2_bm6uj"]
+
+[node name="MainScene" type="Node2D"]
+
+[node name="PlantMap" parent="." instance=ExtResource("1_7vaon")]
+position = Vector2(128, 64)
+
+[node name="Menu" type="Node2D" parent="."]
+
+[node name="PlantButtonBHi" parent="Menu" instance=ExtResource("2_bm6uj")]
+position = Vector2(64, 96)
+plant_type = "BHi"
+
+[node name="PlantButtonStan" parent="Menu" instance=ExtResource("2_bm6uj")]
+position = Vector2(64, 184)
+plant_type = "Stan"
+
+[node name="PlantButtonJeff" parent="Menu" instance=ExtResource("2_bm6uj")]
+position = Vector2(64, 264)
+plant_type = "Jeff"
+
+[node name="PlantButtonAssi" parent="Menu" instance=ExtResource("2_bm6uj")]
+position = Vector2(64, 352)
+plant_type = "Assi"
+
+[node name="PlantButtonFrank" parent="Menu" instance=ExtResource("2_bm6uj")]
+position = Vector2(64, 448)
+plant_type = "Frank"
+
+[node name="PlantButtonToni" parent="Menu" instance=ExtResource("2_bm6uj")]
+position = Vector2(64, 536)
+plant_type = "Toni"

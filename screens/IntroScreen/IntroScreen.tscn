@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://brunydkjhbbad"]
+
+[ext_resource type="Script" path="res://screens/IntroScreen/IntroScreen.gd" id="1_7ykdk"]
+[ext_resource type="FontFile" uid="uid://b2jbl0piinbrn" path="res://assets/fonts/MunroSmall-wPZw.ttf" id="2_lyf22"]
+
+[node name="IntroScreen" type="Node2D"]
+script = ExtResource("1_7ykdk")
+metadata/_edit_vertical_guides_ = [640.0]
+metadata/_edit_horizontal_guides_ = [360.0]
+
+[node name="SkipButton" type="Button" parent="."]
+offset_left = 569.0
+offset_top = 18.0
+offset_right = 621.0
+offset_bottom = 39.0
+theme_override_fonts/font = ExtResource("2_lyf22")
+theme_override_font_sizes/font_size = 10
+text = "Skip"
+
+[connection signal="pressed" from="SkipButton" to="." method="_on_back_button_pressed"]

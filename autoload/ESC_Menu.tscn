@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://dohj8823jg4i0"]
+
+[node name="ESC_Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 0
