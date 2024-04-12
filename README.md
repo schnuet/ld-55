@@ -32,24 +32,24 @@ We are using autoloaded scripts to manage the game state and to provide utility 
 Set all game-wide variables and functions in this script. This script is autoloaded and is available in all scenes.
 Set variables like this:
 
-    ```gdscript
+```gdscript
 
-    func _ready():
-        # Set the player's health
-        Game.player_health = 100;
+func _ready():
+    # Set the player's health
+    Game.player_health = 100;
 
-    ```
+```
 
 #### MusicPlayer.tscn
 
 This script is used to manage the background music. It is autoloaded and is available in all scenes.
 To play music, call the `play_music` function like this:
 
-    ```gdscript
+```gdscript
 
-    MusicPlayer.play_music("main");
+MusicPlayer.play_music("main");
 
-    ```
+```
 
 Music files should be placed in the `assets/music/` folder. All tracks have to be in the `.ogg` format.
 
@@ -62,18 +62,18 @@ This script is used to display dialog boxes. It is autoloaded and is available i
 
 To display a dialog box, call the `do_dialog` function like this:
 
-    ```gdscript
+```gdscript
 
-    DialogOverlay.do_dialog([{
-        "actor": "chef",  # Choose an actor whose image will be displayed
-        "type": "line",   # line or action
-        "lines": [        # The lines to display
-            "Hello!",
-            "How are you?"
-        ]
-    }]);
+DialogOverlay.do_dialog([{
+    "actor": "chef",  # Choose an actor whose image will be displayed
+    "type": "line",   # line or action
+    "lines": [        # The lines to display
+        "Hello!",
+        "How are you?"
+    ]
+}]);
 
-    ```
+```
 
 ### Add a new autoloaded script
 To add a script to the autoloaded scripts, follow these steps:
