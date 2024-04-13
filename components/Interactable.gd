@@ -10,6 +10,9 @@ func _ready() -> void:
 	var starting_interactors = get_overlapping_areas();
 	for area in starting_interactors:
 		add_interactor(area);
+	
+	connect("area_entered", _on_area_entered);
+	connect("area_exited", _on_area_exited);
 
 func _on_area_entered(area: Area2D) -> void:
 	add_interactor(area);

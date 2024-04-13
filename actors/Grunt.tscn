@@ -1,0 +1,84 @@
+[gd_scene load_steps=12 format=3 uid="uid://cek8ngnsjvhp3"]
+
+[ext_resource type="Script" path="res://actors/Grunt/Grunt.gd" id="1_1sl5w"]
+[ext_resource type="PackedScene" uid="uid://cgfiwncqo8c8" path="res://components/Hitbox.tscn" id="2_bcp7d"]
+[ext_resource type="PackedScene" uid="uid://vsri3xpqpwt3" path="res://components/Healthbar.tscn" id="2_teoto"]
+[ext_resource type="PackedScene" uid="uid://btygwd3ueufow" path="res://components/HurtBox.tscn" id="3_kcjmj"]
+[ext_resource type="PackedScene" uid="uid://ccl80evewkl4w" path="res://components/State.tscn" id="5_81rn1"]
+[ext_resource type="Texture2D" uid="uid://dosrnf4qq314a" path="res://actors/Grunt/Bauer-idle.png" id="6_jhu4v"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qcln8"]
+radius = 6.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kh157"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7xlt0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x1x0x"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_64fn6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_jhu4v")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[node name="Grunt" type="CharacterBody2D"]
+collision_layer = 256
+collision_mask = 784
+script = ExtResource("1_1sl5w")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_qcln8")
+
+[node name="Healthbar" parent="." instance=ExtResource("2_teoto")]
+
+[node name="Hitbox" parent="." instance=ExtResource("2_bcp7d")]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_kh157")
+
+[node name="hurtbox_left" parent="." instance=ExtResource("3_kcjmj")]
+position = Vector2(-8, -8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox_left"]
+shape = SubResource("RectangleShape2D_7xlt0")
+debug_color = Color(0.870574, 0.000494207, 0.84858, 0.42)
+
+[node name="hurtbox_right" parent="." instance=ExtResource("3_kcjmj")]
+position = Vector2(8, -8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox_right"]
+shape = SubResource("RectangleShape2D_x1x0x")
+debug_color = Color(0.819606, 0.00180548, 0.967256, 0.42)
+
+[node name="prepare_timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="attack_timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_desired_distance = 5.0
+target_desired_distance = 5.0
+path_max_distance = 50.0
+avoidance_enabled = true
+radius = 13.0
+neighbor_distance = 40.0
+
+[node name="navigation_timer" type="Timer" parent="."]
+autostart = true
+
+[node name="State" parent="." instance=ExtResource("5_81rn1")]
+position = Vector2(0, -17)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -11)
+sprite_frames = SubResource("SpriteFrames_64fn6")
+animation = &"idle"

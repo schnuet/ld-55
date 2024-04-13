@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://vsri3xpqpwt3"]
+
+[ext_resource type="Script" path="res://components/Healthbar.gd" id="1_hkrud"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mf8wd"]
+bg_color = Color(0.45, 0.45, 0.45, 0.435294)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tfc8p"]
+bg_color = Color(0, 0.611, 0.94, 1)
+
+[node name="Healthbar" type="Node2D"]
+script = ExtResource("1_hkrud")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_left = -8.0
+offset_top = 8.0
+offset_right = 8.0
+offset_bottom = 12.0
+theme_override_styles/background = SubResource("StyleBoxFlat_mf8wd")
+theme_override_styles/fill = SubResource("StyleBoxFlat_tfc8p")
+value = 50.0
+show_percentage = false

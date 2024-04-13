@@ -1,89 +1,54 @@
 extends Node2D
 
+@onready var Grunt = preload("res://actors/Grunt.tscn");
+
+@onready var navigation_region = $NavigationRegion2D;
+
 func _ready():
 	Game.init_vars();
+	
+	do_level(1);
 
 func _process(_delta):
-	pass
+	$Label.text = str(get_player().health);
 
-## Show a specific dialog
-func show_level_dialog(dialog_name: String):
-	match dialog_name:
-		"intro":
-			await DialogOverlay.do_dialog([
-				{
-					"actor": "chef",
-					"type": "line",
-					"lines": [
-						"Professor Jeff!",
-						"We're counting on you!",
-						"We've got a fresh shipment of plants from CR708."
-					]
-				},
-				{
-					"actor": "prof",
-					"type": "line",
-					"lines": [
-						"Great! I'm on my way. What do they do?"
-					]
-				},
-				{
-					"actor": "chef",
-					"type": "line",
-					"lines": [
-						"Thats the thing.",
-						"We don't know.",
-						"We don't even get to plant them all at once!",
-					]
-				},
-				{
-					"actor": "chef",
-					"type": "line",
-					"lines": [
-						"They keep canibalizing each other!",
-					]
-				},
-				{
-					"actor": "prof",
-					"type": "line",
-					"lines": [
-						"Strange.",
-						"Did you try pulling them out and putting them in again?"
-					]
-				},
-				{
-					"actor": "chef",
-					"type": "line",
-					"lines": [
-						"Well, that's YOUR job now.",
-						"Plant them all!"
-					]
-				},
-				{
-					"actor": "prof",
-					"type": "line",
-					"lines": [
-						"Okaydokay.",
-						"Let's better start slow..."
-					]
-				},
-			],
-			self);
+func get_player():
+	return get_tree().get_nodes_in_group("player")[0];
 
 
-#func fade_out_menu():
-	#var tween = get_tree().create_tween();
-	#tween.tween_property(menu, "position:y", default_menu_y + 50, 1);
-	#tween.set_ease(Tween.EASE_IN);
-	#await tween.finished;
-#
-#func fade_in_menu():
-	#var tween = get_tree().create_tween();
-	#$Console_up.play();
-	#tween.tween_property(menu, "position:y", default_menu_y, 1);
-	#tween.set_ease(Tween.EASE_OUT);
-	#await tween.finished;
+func do_level(level_number: int):
+	const LEFT = -30;
+	const RIGHT = 720;
+	const MIN_Y = 100;
+	
+	const B = 100;
+	const H = 360 - 100;
+	
+	
+	match(level_number):
+		1:
+			await Game.wait(2);
+			spawn_grunt(LEFT, B + H * 0.5);
+			spawn_grunt(RIGHT, B + H * 0.5);
+			await Game.wait(7);
+			spawn_grunt(LEFT, B + H * 0.5);
+			spawn_grunt(RIGHT, B + H * 0.5);
+			await Game.wait(10);
+			spawn_grunt(LEFT, B + H * 0.5);
+			spawn_grunt(RIGHT, B + H * 0.5);
+			await Game.wait(10);
+			spawn_grunt(LEFT, B + H * 0.5);
+			spawn_grunt(RIGHT, B + H * 0.5);
+			await Game.wait(10);
+			spawn_grunt(LEFT, B + H * 0.5);
+			spawn_grunt(RIGHT, B + H * 0.5);
 
-
-func _on_leave_hotspot_click() -> void:
-	SceneManager.change_scene("res://screens/OutroScreen/OutroScreen.tscn");
+func spawn_grunt(x, y):
+	var new_grunt = Grunt.instantiate();
+	new_grunt.global_position.x = x;
+	new_grunt.global_position.y = y;
+	
+	navigation_region.add_child(new_grunt);
+	return new_grunt;
+	
+	

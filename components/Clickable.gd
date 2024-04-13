@@ -17,7 +17,7 @@ func _ready() -> void:
 func _on_input_event(_viewport, event, _shape_idx) -> void:
 	if disabled:
 		return;
-		
+
 	# CLICK HANDLER!
 	if event is InputEventMouseButton and event.is_pressed():
 		get_viewport().set_input_as_handled();

@@ -1,22 +1,66 @@
-[gd_scene load_steps=4 format=3 uid="uid://fbk1capf22s7"]
+[gd_scene load_steps=7 format=3 uid="uid://fbk1capf22s7"]
 
 [ext_resource type="Script" path="res://scenes/MainScene/MainScene.gd" id="1_ggjwf"]
-[ext_resource type="PackedScene" uid="uid://dpmdaai7cmful" path="res://components/Clickable.tscn" id="2_eu7lg"]
+[ext_resource type="Texture2D" uid="uid://b78daenxgbfnt" path="res://assets/backgrounds/image_v1.png" id="2_mcxpb"]
+[ext_resource type="PackedScene" uid="uid://cmohkqk14hjpa" path="res://actors/Player.tscn" id="2_ybnci"]
+[ext_resource type="PackedScene" uid="uid://cek8ngnsjvhp3" path="res://actors/Grunt.tscn" id="3_jc8jb"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_6om6c"]
-size = Vector2(141, 100)
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_v3ecc"]
+vertices = PackedVector2Array(905, 355, -213, 355, -213, 5, 906, 5)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-223, -5, -223, 365, 915, 365, 916, -5)])
+source_geometry_group_name = &"navigation_polygon_source_group"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xtlib"]
+size = Vector2(671.5, 20)
 
 [node name="MainScene" type="Node2D"]
 script = ExtResource("1_ggjwf")
 metadata/_edit_vertical_guides_ = [640.0]
 metadata/_edit_horizontal_guides_ = [360.0]
-
-[node name="LeaveHotspot" parent="." instance=ExtResource("2_eu7lg")]
-position = Vector2(314, 54)
-metadata/_edit_group_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LeaveHotspot"]
-shape = SubResource("RectangleShape2D_6om6c")
 metadata/_edit_lock_ = true
 
-[connection signal="click" from="LeaveHotspot" to="." method="_on_leave_hotspot_click"]
+[node name="ImageV1" type="Sprite2D" parent="."]
+texture = ExtResource("2_mcxpb")
+centered = false
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+y_sort_enabled = true
+navigation_polygon = SubResource("NavigationPolygon_v3ecc")
+
+[node name="Player" parent="NavigationRegion2D" instance=ExtResource("2_ybnci")]
+position = Vector2(249, 193)
+
+[node name="Grunt" parent="NavigationRegion2D" instance=ExtResource("3_jc8jb")]
+position = Vector2(27, 188)
+
+[node name="Grunt2" parent="NavigationRegion2D" instance=ExtResource("3_jc8jb")]
+position = Vector2(473, 193)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="NavigationRegion2D"]
+position = Vector2(-17, 132)
+collision_layer = 16
+collision_mask = 16
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/StaticBody2D"]
+position = Vector2(335.75, 10)
+shape = SubResource("RectangleShape2D_xtlib")
+metadata/_edit_lock_ = true
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="NavigationRegion2D"]
+position = Vector2(-17, 315)
+collision_layer = 16
+collision_mask = 16
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/StaticBody2D2"]
+position = Vector2(335.75, 10)
+shape = SubResource("RectangleShape2D_xtlib")
+metadata/_edit_lock_ = true
+
+[node name="Label" type="Label" parent="."]
+offset_left = 8.0
+offset_top = 6.0
+offset_right = 48.0
+offset_bottom = 29.0
