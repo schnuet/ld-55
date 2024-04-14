@@ -26,13 +26,13 @@ func _on_area_exited(area: Area2D) -> void:
 
 func add_hurtbox(hurtbox: Area2D):
 	hurtboxes.append(hurtbox);
-	hurtbox.in_range = true;
 	hurtbox.connect("activated", _on_hurtbox_activate.bind(hurtbox));
+	hurtbox.enter_range();
 	
 func remove_hurtbox(hurtbox: Area2D):
 	hurtboxes.erase(hurtbox);
-	hurtbox.in_range = false;
 	hurtbox.disconnect("activated", _on_hurtbox_activate.bind(hurtbox));
+	hurtbox.leave_range();
 
 func _on_hurtbox_activate(hurtbox: Area2D):
 	var hurtbox_parent = hurtbox.get_parent();

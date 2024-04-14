@@ -1,28 +1,46 @@
-[gd_scene load_steps=7 format=3 uid="uid://fbk1capf22s7"]
+[gd_scene load_steps=10 format=3 uid="uid://fbk1capf22s7"]
 
 [ext_resource type="Script" path="res://scenes/MainScene/MainScene.gd" id="1_ggjwf"]
+[ext_resource type="Texture2D" uid="uid://e3ibtnj643vl" path="res://assets/backgrounds/bg_2.png" id="2_fcsbu"]
 [ext_resource type="Texture2D" uid="uid://b78daenxgbfnt" path="res://assets/backgrounds/image_v1.png" id="2_mcxpb"]
 [ext_resource type="PackedScene" uid="uid://cmohkqk14hjpa" path="res://actors/Player.tscn" id="2_ybnci"]
-[ext_resource type="PackedScene" uid="uid://cek8ngnsjvhp3" path="res://actors/Grunt.tscn" id="3_jc8jb"]
+[ext_resource type="Texture2D" uid="uid://fnsw07teu6ot" path="res://assets/ui/summoning_Levelup_menu.png" id="5_24bfk"]
+[ext_resource type="Texture2D" uid="uid://dqvgxidg7mk58" path="res://assets/ui/hover_powerup.png" id="6_o8na3"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_v3ecc"]
-vertices = PackedVector2Array(905, 355, -213, 355, -213, 5, 906, 5)
+vertices = PackedVector2Array(539, 223, -85, 223, -85, 121, 539, 121)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-223, -5, -223, 365, 915, 365, 916, -5)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-95, 85, -95, 270, 549, 270, 549, 85)])
 source_geometry_group_name = &"navigation_polygon_source_group"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xtlib"]
-size = Vector2(671.5, 20)
+size = Vector2(1213, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_onrop"]
+size = Vector2(20, 373)
 
 [node name="MainScene" type="Node2D"]
 script = ExtResource("1_ggjwf")
-metadata/_edit_vertical_guides_ = [640.0]
-metadata/_edit_horizontal_guides_ = [360.0]
+metadata/_edit_vertical_guides_ = [480.0]
+metadata/_edit_horizontal_guides_ = [270.0]
+metadata/_edit_lock_ = true
+
+[node name="Bg2" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("2_fcsbu")
+centered = false
 metadata/_edit_lock_ = true
 
 [node name="ImageV1" type="Sprite2D" parent="."]
 texture = ExtResource("2_mcxpb")
 centered = false
+
+[node name="BossButton" type="Button" parent="."]
+offset_left = 20.0
+offset_top = 17.0
+offset_right = 85.0
+offset_bottom = 48.0
+text = "BOSS"
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 y_sort_enabled = true
@@ -31,14 +49,8 @@ navigation_polygon = SubResource("NavigationPolygon_v3ecc")
 [node name="Player" parent="NavigationRegion2D" instance=ExtResource("2_ybnci")]
 position = Vector2(249, 193)
 
-[node name="Grunt" parent="NavigationRegion2D" instance=ExtResource("3_jc8jb")]
-position = Vector2(27, 188)
-
-[node name="Grunt2" parent="NavigationRegion2D" instance=ExtResource("3_jc8jb")]
-position = Vector2(473, 193)
-
 [node name="StaticBody2D" type="StaticBody2D" parent="NavigationRegion2D"]
-position = Vector2(-17, 132)
+position = Vector2(-17, 91)
 collision_layer = 16
 collision_mask = 16
 metadata/_edit_group_ = true
@@ -49,18 +61,62 @@ shape = SubResource("RectangleShape2D_xtlib")
 metadata/_edit_lock_ = true
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="NavigationRegion2D"]
-position = Vector2(-17, 315)
+position = Vector2(-17, 233)
 collision_layer = 16
 collision_mask = 16
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/StaticBody2D2"]
-position = Vector2(335.75, 10)
+position = Vector2(381.5, 10)
 shape = SubResource("RectangleShape2D_xtlib")
 metadata/_edit_lock_ = true
 
-[node name="Label" type="Label" parent="."]
-offset_left = 8.0
-offset_top = 6.0
-offset_right = 48.0
-offset_bottom = 29.0
+[node name="StaticBody2D3" type="StaticBody2D" parent="NavigationRegion2D"]
+position = Vector2(10, 28)
+collision_layer = 4096
+collision_mask = 512
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/StaticBody2D3"]
+position = Vector2(0, 176.5)
+shape = SubResource("RectangleShape2D_onrop")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="NavigationRegion2D"]
+position = Vector2(470, 28)
+collision_layer = 4096
+collision_mask = 512
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/StaticBody2D4"]
+position = Vector2(0, 176.5)
+shape = SubResource("RectangleShape2D_onrop")
+
+[node name="card" type="Sprite2D" parent="."]
+position = Vector2(240, 135)
+texture = ExtResource("5_24bfk")
+
+[node name="button_health" type="TextureButton" parent="card"]
+offset_left = -146.0
+offset_top = 19.0
+offset_right = -46.0
+offset_bottom = 69.0
+texture_pressed = ExtResource("6_o8na3")
+texture_hover = ExtResource("6_o8na3")
+
+[node name="button_damage" type="TextureButton" parent="card"]
+auto_translate_mode = 1
+offset_left = -51.0
+offset_top = 17.0
+offset_right = 49.0
+offset_bottom = 67.0
+texture_pressed = ExtResource("6_o8na3")
+texture_hover = ExtResource("6_o8na3")
+
+[node name="button_healing" type="TextureButton" parent="card"]
+auto_translate_mode = 1
+offset_left = 52.0
+offset_top = 17.0
+offset_right = 152.0
+offset_bottom = 67.0
+texture_pressed = ExtResource("6_o8na3")
+texture_hover = ExtResource("6_o8na3")
+
+[connection signal="pressed" from="BossButton" to="." method="_on_boss_button_pressed"]

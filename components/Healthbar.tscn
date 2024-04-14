@@ -4,14 +4,20 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mf8wd"]
 bg_color = Color(0.45, 0.45, 0.45, 0.435294)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.03, 0.03, 0.03, 0.486275)
+expand_margin_left = 1.0
+expand_margin_top = 1.0
+expand_margin_right = 1.0
+expand_margin_bottom = 1.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tfc8p"]
-bg_color = Color(0, 0.611, 0.94, 1)
+bg_color = Color(0.74, 0, 0, 1)
 
-[node name="Healthbar" type="Node2D"]
-script = ExtResource("1_hkrud")
-
-[node name="ProgressBar" type="ProgressBar" parent="."]
+[node name="HealthBar" type="ProgressBar"]
 offset_left = -8.0
 offset_top = 8.0
 offset_right = 8.0
@@ -20,3 +26,4 @@ theme_override_styles/background = SubResource("StyleBoxFlat_mf8wd")
 theme_override_styles/fill = SubResource("StyleBoxFlat_tfc8p")
 value = 50.0
 show_percentage = false
+script = ExtResource("1_hkrud")

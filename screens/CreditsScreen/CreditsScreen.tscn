@@ -8,6 +8,8 @@
 
 [node name="CreditsScreen" type="Node2D"]
 script = ExtResource("1_cyvqq")
+metadata/_edit_vertical_guides_ = [480.0]
+metadata/_edit_horizontal_guides_ = [270.0]
 
 [node name="SpaceGardenEndscreen" type="Sprite2D" parent="."]
 texture = ExtResource("2_mukfy")
@@ -77,10 +79,10 @@ text = "Stefan Hofer
 label_settings = ExtResource("4_goqij")
 
 [node name="BackButton" type="Button" parent="."]
-offset_left = 536.0
-offset_top = 320.0
-offset_right = 621.0
-offset_bottom = 341.0
+offset_left = 377.0
+offset_top = 234.0
+offset_right = 462.0
+offset_bottom = 255.0
 theme_override_fonts/font = ExtResource("5_qdyo1")
 theme_override_font_sizes/font_size = 10
 text = "Back to Start"

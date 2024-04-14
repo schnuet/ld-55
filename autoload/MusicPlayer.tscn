@@ -1,16 +1,16 @@
 [gd_scene load_steps=4 format=3 uid="uid://b7waitvkebweq"]
 
 [ext_resource type="Script" path="res://autoload/MusicPlayer.gd" id="1_ygrd7"]
-[ext_resource type="AudioStream" uid="uid://dvuiop7m807dv" path="res://assets/music/Space-Garden-Theme.ogg" id="2_slng5"]
-[ext_resource type="AudioStream" uid="uid://dr4ivh0pyajvj" path="res://assets/music/Space-Garden-Theme-Radio.ogg" id="3_gw7f3"]
+[ext_resource type="AudioStream" uid="uid://ckir3ykkoyogh" path="res://assets/music/Summoning Bossfight.ogg" id="3_viju3"]
+[ext_resource type="AudioStream" uid="uid://b7bi210syj7j7" path="res://assets/music/Summoning.ogg" id="4_v23gg"]
 
 [node name="MusicPlayer" type="Node"]
 script = ExtResource("1_ygrd7")
 
 [node name="main" type="AudioStreamPlayer" parent="."]
-process_mode = 3
-stream = ExtResource("2_slng5")
-volume_db = -2.0
+stream = ExtResource("4_v23gg")
+volume_db = -15.0
 
-[node name="radio" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_gw7f3")
+[node name="boss" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_viju3")
+volume_db = -14.0

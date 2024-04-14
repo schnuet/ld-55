@@ -1,11 +1,14 @@
 extends CharacterBody2D
 
+signal dead;
+
 const SPEED: float = 80;
 const FRICTION = 0.20;
 #var velocity = Vector2.ZERO;
 
 var max_health: float = 4;
 var health: float = 4;
+var damage = 1;
 
 enum State {
 	CHASE,
@@ -29,6 +32,7 @@ var hurt_recoil_speed: Vector2 = Vector2.ZERO;
 @onready var hurtbox_left = $hurtbox_left;
 @onready var hurtbox_right = $hurtbox_right;
 @onready var animated_sprite = $AnimatedSprite2D;
+@onready var shadow = $Shadow;
 
 @onready var prepare_timer = $prepare_timer;
 @onready var attack_timer = $attack_timer;
@@ -55,11 +59,100 @@ func _physics_process(delta: float) -> void:
 			_update_die(delta);
 
 
-func _enter_chase():
+# ============
+# PREPARE
+
+func _enter_prepare():
+	animated_sprite.play("attack");
+	await animated_sprite.frame_changed;
+	await animated_sprite.frame_changed;
+	await animated_sprite.frame_changed;
+	await animated_sprite.frame_changed;
+	await animated_sprite.frame_changed;
+	set_state(State.ATTACK);
+	
+func _update_prepare(_delta: float):
 	pass
 
-func _update_chase(delta: float) -> void:
-	if navigation_agent.is_navigation_finished():
+
+# ============
+# ATTACK
+
+func _enter_attack():
+	hit(damage);
+	await animated_sprite.animation_finished;
+	set_state(State.CHASE);
+
+func _update_attack(_delta: float):
+	pass
+
+func hit(hit_strength: float = 1):
+	if orientation == Direction.LEFT:
+		hurtbox_left.damage = hit_strength;
+		hurtbox_left.activate();
+	if orientation == Direction.RIGHT:
+		hurtbox_right.damage = hit_strength;
+		hurtbox_right.activate();
+
+# ============
+# HURT
+
+func _enter_hurt():
+	print("hurt enter");
+	velocity = hurt_recoil_speed * 5;
+	
+	await Game.wait(0.5);
+	
+	if state == State.HURT:
+		set_state(State.CHASE);
+
+func _update_hurt(_delta):
+	velocity *= 0.9;
+	move_and_slide();
+
+
+func _on_hit(damage: float, player: Node2D):
+	get_hit(damage, (global_position - player.global_position).normalized());
+
+func get_hit(damage: float, direction: Vector2):
+	health = max(health - damage, 0);
+	hurt_recoil_speed = direction * 80;
+	set_state(State.HURT);
+	
+	if health == 0:
+		set_state(State.DIE);
+
+# ============
+# DIE
+
+func _enter_die():
+	shadow.hide();
+	var tween = get_tree().create_tween();
+	var fade_duration = 1;
+	tween.tween_property(self, "modulate", Color.TRANSPARENT, fade_duration);
+	await tween.finished;
+	emit_signal("dead");
+	queue_free();
+	
+func _update_die(_delta):
+	velocity *= 0.9;
+	move_and_slide();
+
+
+# ============
+# CHASE
+
+func _enter_chase():
+	animated_sprite.play("run");
+
+func _update_chase(_delta: float) -> void:
+	if velocity.length() < 2:
+		animated_sprite.stop();
+	else:
+		if !animated_sprite.is_playing():
+			animated_sprite.play();
+	
+	if navigation_agent.is_navigation_finished() or navigation_agent.distance_to_target() < 7:
 		if hurtbox_left.in_range:
 			if orientation != Direction.LEFT:
 				set_orientation(Direction.LEFT);
@@ -87,78 +180,44 @@ func _update_chase(delta: float) -> void:
 	navigation_agent.set_velocity(intended_velocity);
 	
 	update_orientation(velocity);
-	global_position += velocity * delta;
+
+func _on_navigation_agent_2d_velocity_computed(safe_velocity: Vector2) -> void:
+	if state == State.CHASE:
+		velocity = safe_velocity.limit_length(SPEED)
+		move_and_slide()
 
 
-func _enter_prepare():
-	prepare_timer.start(1);
+func get_player_position():
+	var player = get_player();
+	var player_pos = player.global_position;
+	return player_pos;
+
+func get_closest_player_hit_position(player_pos: Vector2):
+	var x = player_pos.x;
+	var y = player_pos.y;
 	
-func _update_prepare(_delta: float):
-	if prepare_timer.is_stopped():
-		set_state(State.ATTACK);
-
-
-
-func _enter_attack():
-	attack_timer.start(0.5);
-	hit();
-
-func _update_attack(_delta: float):
-	if attack_timer.is_stopped():
-		set_state(State.CHASE);
-
-
-func _enter_hurt():
-	print("hurt enter");
-	velocity = hurt_recoil_speed * 5;
+	if player_pos.x + 20 < global_position.x:
+		x += 20;
+	elif player_pos.x - 20 > global_position.x:
+		x -= 20;
+	else:
+		var center_direction = sign(320 - global_position.x);
+		x += center_direction * 20;
 	
-	await Game.wait(0.5);
+	if player_pos.y + 2 < global_position.y:
+		y += 2;
+	elif player_pos.y - 2 > global_position.y:
+		y -= 2;
 	
-	if state == State.HURT:
-		set_state(State.CHASE);
+	return Vector2(x, y);
 
-func _update_hurt(_delta):
-	velocity *= 0.9;
-	move_and_slide();
-
-
-func hit(hit_strength: float = 1):
-	if orientation == Direction.LEFT:
-		hurtbox_left.damage = hit_strength;
-		hurtbox_left.activate();
-	if orientation == Direction.RIGHT:
-		hurtbox_right.damage = hit_strength;
-		hurtbox_right.activate();
-
-
-
-func _on_hit(damage: float, player: Node2D):
-	get_hit(damage, (global_position - player.global_position).normalized());
-
-func get_hit(damage: float, direction: Vector2):
-	health = max(health - damage, 0);
-	hurt_recoil_speed = direction * 80;
-	set_state(State.HURT);
-	
-	if health == 0:
-		die();
-
-
-func die():
-	set_state(State.DIE);
-	var tween = get_tree().create_tween();
-	var fade_duration = 1;
-	tween.tween_property(self, "modulate", Color.TRANSPARENT, fade_duration);
-	await tween.finished;
-	queue_free();
-
-func _enter_die():
-	pass
-func _update_die(_delta):
-	velocity *= 0.9;
-	move_and_slide();
+# ============
+# STATE MANAGEMENT
 
 func set_state(new_state: State):
+	if state == State.DIE:
+		return;
+	
 	match new_state:
 		State.CHASE: _enter_chase();
 		State.PREPARE: _enter_prepare();
@@ -168,13 +227,14 @@ func set_state(new_state: State):
 		_: print("UNDEFINED ENTER STATE!!");
 	state = new_state;
 
+# ============
+# ORIENTATION
 
 func update_orientation(direction: Vector2):
 	if direction.x > 0.5:
 		set_orientation(Direction.RIGHT);
 	if direction.x < 0.5:
 		set_orientation(Direction.LEFT);
-
 
 func set_orientation(orient: Direction):
 	orientation = orient;
@@ -192,18 +252,3 @@ func set_orientation(orient: Direction):
 func get_player() -> CharacterBody2D:
 	return get_tree().get_nodes_in_group('player')[0];
 
-func get_player_position():
-	var player = get_player();
-	var player_pos = player.global_position;
-	return player_pos;
-
-func get_closest_player_hit_position(player_pos: Vector2):
-	if player_pos.x < global_position.x:
-		return Vector2(player_pos.x + 16, player_pos.y);
-	else:
-		return Vector2(player_pos.x - 16, player_pos.y);
-
-
-func _on_navigation_agent_2d_velocity_computed(safe_velocity: Vector2) -> void:
-	if state == State.CHASE:
-		velocity = safe_velocity

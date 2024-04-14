@@ -1,7 +1,5 @@
 extends Node2D
 
-signal cursor_mode_changed(mode);
-
 var anim_frame = 0;
 
 # Game-wide variables
@@ -9,6 +7,7 @@ var anim_frame = 0;
 var dodge_available = true;
 var health_buff = 0;
 var speed_buff = 0;
+var damage_buff = 0;
 var dodge_distance_buff = 0;
 
 ## Set all game-wide variables to the values they should have
