@@ -3,6 +3,7 @@ extends Node2D
 var anim_frame = 0;
 
 # Game-wide variables
+var mode = "normal";
 
 var dodge_available = true;
 var health_buff = 0;

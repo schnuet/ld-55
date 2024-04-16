@@ -1,0 +1,121 @@
+[gd_scene load_steps=13 format=3 uid="uid://b66tqp20fftw1"]
+
+[ext_resource type="Script" path="res://scenes/TutorialScene/TutorialScene.gd" id="1_wtbml"]
+[ext_resource type="Texture2D" uid="uid://ddnplvblpwt13" path="res://assets/backgrounds/hell.png" id="2_fvrqj"]
+[ext_resource type="Texture2D" uid="uid://bnyisyx8nkyyk" path="res://assets/ui/controls_dodge.png" id="3_n4yy7"]
+[ext_resource type="Texture2D" uid="uid://dlk4qx2pmxron" path="res://assets/ui/controls_hit.png" id="4_0m0w1"]
+[ext_resource type="Texture2D" uid="uid://uisqfcy48nnx" path="res://assets/ui/controls_move.png" id="5_6xl2u"]
+[ext_resource type="Texture2D" uid="uid://bjnebm5sxaxpj" path="res://assets/ui/skip_button.png" id="8_218kq"]
+[ext_resource type="Texture2D" uid="uid://dql1gp45tksrf" path="res://assets/ui/skip_button_hover.png" id="9_sveh7"]
+[ext_resource type="PackedScene" uid="uid://cmohkqk14hjpa" path="res://actors/Player.tscn" id="10_y0giy"]
+[ext_resource type="Texture2D" uid="uid://cmp7gllrgxvqo" path="res://assets/titles/levelname_dorf.png" id="14_r11jp"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_v3ecc"]
+vertices = PackedVector2Array(-10, 223, -85, 223, -85, 121, -10, 121, 450, 223, 30, 223, 30, 121, 450, 121, 539, 223, 490, 223, 490, 121, 539, 121)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7), PackedInt32Array(8, 9, 10, 11)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-95, 85, -95, 270, 549, 270, 549, 85)])
+source_geometry_group_name = &"navigation_polygon_source_group"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xtlib"]
+size = Vector2(1213, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_onrop"]
+size = Vector2(20, 373)
+
+[node name="TutorialScene" type="Node2D"]
+script = ExtResource("1_wtbml")
+metadata/_edit_vertical_guides_ = [480.0]
+metadata/_edit_horizontal_guides_ = [270.0]
+metadata/_edit_lock_ = true
+
+[node name="bg_0" type="Sprite2D" parent="."]
+texture = ExtResource("2_fvrqj")
+centered = false
+metadata/_edit_lock_ = true
+
+[node name="ControlsDodge" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(243, 83)
+texture = ExtResource("3_n4yy7")
+
+[node name="ControlsHit" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(262, 85)
+texture = ExtResource("4_0m0w1")
+
+[node name="ControlsMove" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(237, 77)
+texture = ExtResource("5_6xl2u")
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+y_sort_enabled = true
+navigation_polygon = SubResource("NavigationPolygon_v3ecc")
+
+[node name="Player" parent="NavigationRegion2D" instance=ExtResource("10_y0giy")]
+position = Vector2(251, 181)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="NavigationRegion2D"]
+visible = false
+position = Vector2(-17, 91)
+collision_layer = 16
+collision_mask = 16
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/StaticBody2D"]
+position = Vector2(335.75, 10)
+shape = SubResource("RectangleShape2D_xtlib")
+metadata/_edit_lock_ = true
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="NavigationRegion2D"]
+visible = false
+position = Vector2(-17, 233)
+collision_layer = 16
+collision_mask = 16
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/StaticBody2D2"]
+position = Vector2(381.5, 10)
+shape = SubResource("RectangleShape2D_xtlib")
+metadata/_edit_lock_ = true
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="NavigationRegion2D"]
+visible = false
+position = Vector2(10, 28)
+collision_layer = 4096
+collision_mask = 512
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/StaticBody2D3"]
+position = Vector2(0, 176.5)
+shape = SubResource("RectangleShape2D_onrop")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="NavigationRegion2D"]
+visible = false
+position = Vector2(470, 28)
+collision_layer = 4096
+collision_mask = 512
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/StaticBody2D4"]
+position = Vector2(0, 176.5)
+shape = SubResource("RectangleShape2D_onrop")
+
+[node name="title_1" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("14_r11jp")
+centered = false
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="SkipButton" type="TextureButton" parent="CanvasLayer"]
+auto_translate_mode = 1
+offset_left = 396.0
+offset_top = 18.0
+offset_right = 460.0
+offset_bottom = 50.0
+texture_normal = ExtResource("8_218kq")
+texture_pressed = ExtResource("9_sveh7")
+texture_hover = ExtResource("9_sveh7")
+texture_disabled = ExtResource("8_218kq")
+texture_focused = ExtResource("9_sveh7")
+
+[connection signal="pressed" from="CanvasLayer/SkipButton" to="." method="_on_skip_button_pressed"]

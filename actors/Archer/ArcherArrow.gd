@@ -1,5 +1,7 @@
 extends Area2D
 
+var damage = 2;
+
 @export var target_position: Vector2 = Vector2.ZERO;
 var start_position = Vector2.ZERO;
 var shadow_start_position = Vector2.ZERO;
@@ -48,5 +50,6 @@ func map_centered(x: float) -> float:
 
 
 func _on_hurt_box_entered_range() -> void:
+	$HurtBox.damage = damage;
 	$HurtBox.activate();
 	queue_free();

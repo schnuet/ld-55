@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c5jja8pm8aye1"
-path="res://.godot/imported/space_garden_cover.png-971ee9942c207b0bb7e82e718735f857.ctex"
+uid="uid://1qg37cqdtlcs"
+path="res://.godot/imported/hard_button.png-50424f0ba4c2183094c585d2f4533a1c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://space_garden_cover.png"
-dest_files=["res://.godot/imported/space_garden_cover.png-971ee9942c207b0bb7e82e718735f857.ctex"]
+source_file="res://screens/StartScreen/hard_button.png"
+dest_files=["res://.godot/imported/hard_button.png-50424f0ba4c2183094c585d2f4533a1c.ctex"]
 
 [params]
 

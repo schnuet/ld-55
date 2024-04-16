@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://d3k4smplp2buf"]
+[gd_scene load_steps=43 format=3 uid="uid://d3k4smplp2buf"]
 
 [ext_resource type="Script" path="res://actors/Knight/Knight.gd" id="1_joqqg"]
 [ext_resource type="PackedScene" uid="uid://vsri3xpqpwt3" path="res://components/Healthbar.tscn" id="2_6cqai"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://dw5jydyek7upw" path="res://actors/Knight/Sword_guy-run.png" id="6_ll2nv"]
 [ext_resource type="Texture2D" uid="uid://y28i21jv8war" path="res://actors/Knight/Schwert-Typ-idle.png" id="6_p3wc0"]
 [ext_resource type="Texture2D" uid="uid://c8nusubtc4iqg" path="res://actors/Knight/Sword_Big-attack.png" id="6_yyan4"]
+[ext_resource type="Texture2D" uid="uid://k2iu3q6qrdge" path="res://actors/Knight/Sword_big-hurt.png" id="7_0wskp"]
 [ext_resource type="Texture2D" uid="uid://cr2cvc087ojcp" path="res://actors/Knight/Sword_big-idle.png" id="8_15jml"]
 [ext_resource type="Texture2D" uid="uid://ccmc2pnvukvsg" path="res://actors/Knight/Sword_big-run.png" id="10_04qdl"]
 
@@ -164,6 +165,14 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("7_0wskp")
+}],
+"loop": true,
+"name": &"hurt",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("6_p3wc0")
 }],
 "loop": true,
@@ -293,7 +302,7 @@ autostart = true
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -31)
 sprite_frames = SubResource("SpriteFrames_dxc4k")
-animation = &"attack_big"
+animation = &"idle_big"
 
 [node name="State" parent="." instance=ExtResource("5_e8n88")]
 visible = false

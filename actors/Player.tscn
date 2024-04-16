@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://cmohkqk14hjpa"]
+[gd_scene load_steps=65 format=3 uid="uid://cmohkqk14hjpa"]
 
 [ext_resource type="Script" path="res://actors/Player/Player.gd" id="1_q8acq"]
 [ext_resource type="PackedScene" uid="uid://cgfiwncqo8c8" path="res://components/Hitbox.tscn" id="2_l8nar"]
@@ -7,8 +7,13 @@
 [ext_resource type="Texture2D" uid="uid://jpr2mx2jvogg" path="res://actors/Player/demon_walk.png" id="4_h2oap"]
 [ext_resource type="Texture2D" uid="uid://ivairdeq7gab" path="res://actors/Player/demon_attack.png" id="4_j4s6l"]
 [ext_resource type="Texture2D" uid="uid://dmy7dexmnohca" path="res://actors/Player/demon_dodge.png" id="5_no3qy"]
+[ext_resource type="Texture2D" uid="uid://bfadmu5xlxvhl" path="res://actors/Player/demon_death.png" id="6_qq888"]
 [ext_resource type="Texture2D" uid="uid://3fpu23rxliyo" path="res://actors/Player/demon_summon.png" id="7_rkem3"]
 [ext_resource type="PackedScene" uid="uid://vsri3xpqpwt3" path="res://components/Healthbar.tscn" id="7_tdwdq"]
+[ext_resource type="AudioStream" uid="uid://vf1l3cxqy4c0" path="res://actors/Player/sounds/demon_dodge.ogg" id="10_iw6qf"]
+[ext_resource type="AudioStream" uid="uid://f6x3hl6acqbo" path="res://actors/Player/sounds/demon_get_hit.ogg" id="11_0dd0h"]
+[ext_resource type="AudioStream" uid="uid://c76obryobim5w" path="res://actors/Player/sounds/demon_punsh.ogg" id="12_h7oh8"]
+[ext_resource type="AudioStream" uid="uid://b0l2b28wsn7ls" path="res://actors/Player/sounds/demon_summon.ogg" id="13_1sleg"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_q8v6s"]
 radius = 8.0
@@ -141,6 +146,86 @@ region = Rect2(280, 0, 56, 72)
 atlas = ExtResource("4_j4s6l")
 region = Rect2(336, 0, 56, 72)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_uxbrd"]
+atlas = ExtResource("6_qq888")
+region = Rect2(0, 0, 56, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nfteq"]
+atlas = ExtResource("6_qq888")
+region = Rect2(56, 0, 56, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_77ws8"]
+atlas = ExtResource("6_qq888")
+region = Rect2(112, 0, 56, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gvic7"]
+atlas = ExtResource("6_qq888")
+region = Rect2(168, 0, 56, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ir4ap"]
+atlas = ExtResource("6_qq888")
+region = Rect2(224, 0, 56, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pohqx"]
+atlas = ExtResource("6_qq888")
+region = Rect2(280, 0, 56, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iftxd"]
+atlas = ExtResource("6_qq888")
+region = Rect2(336, 0, 56, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_62kj7"]
+atlas = ExtResource("6_qq888")
+region = Rect2(392, 0, 56, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wei8q"]
+atlas = ExtResource("6_qq888")
+region = Rect2(448, 0, 56, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hgvbe"]
+atlas = ExtResource("6_qq888")
+region = Rect2(504, 0, 56, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q0lyi"]
+atlas = ExtResource("6_qq888")
+region = Rect2(560, 0, 56, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cy6yw"]
+atlas = ExtResource("6_qq888")
+region = Rect2(616, 0, 56, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rmo3s"]
+atlas = ExtResource("6_qq888")
+region = Rect2(672, 0, 56, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2hqqg"]
+atlas = ExtResource("6_qq888")
+region = Rect2(728, 0, 56, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8mais"]
+atlas = ExtResource("6_qq888")
+region = Rect2(784, 0, 56, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_peexb"]
+atlas = ExtResource("6_qq888")
+region = Rect2(840, 0, 56, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7g2bu"]
+atlas = ExtResource("6_qq888")
+region = Rect2(896, 0, 56, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_272x0"]
+atlas = ExtResource("6_qq888")
+region = Rect2(952, 0, 56, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xapl0"]
+atlas = ExtResource("6_qq888")
+region = Rect2(1008, 0, 56, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_svtxc"]
+atlas = ExtResource("6_qq888")
+region = Rect2(1064, 0, 56, 72)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_vxa8x"]
 atlas = ExtResource("5_no3qy")
 region = Rect2(56, 0, 56, 72)
@@ -186,6 +271,71 @@ animations = [{
 "loop": false,
 "name": &"attack",
 "speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uxbrd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nfteq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_77ws8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gvic7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ir4ap")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pohqx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iftxd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_62kj7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wei8q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hgvbe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q0lyi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cy6yw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rmo3s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2hqqg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8mais")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_peexb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7g2bu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_272x0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xapl0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_svtxc")
+}],
+"loop": false,
+"name": &"die",
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -285,5 +435,21 @@ offset_left = -14.0
 offset_top = -57.0
 offset_right = 14.0
 offset_bottom = -53.0
+
+[node name="snd_dodge" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_iw6qf")
+volume_db = -16.0
+
+[node name="snd_hurt" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_0dd0h")
+volume_db = -16.0
+
+[node name="snd_punch" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_h7oh8")
+volume_db = -16.0
+
+[node name="snd_summon" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_1sleg")
+volume_db = -16.0
 
 [connection signal="hit" from="hitbox" to="." method="_on_hitbox_hit"]

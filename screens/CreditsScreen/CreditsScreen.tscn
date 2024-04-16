@@ -1,90 +1,34 @@
 [gd_scene load_steps=6 format=3 uid="uid://dlysit4dy8gap"]
 
 [ext_resource type="Script" path="res://screens/CreditsScreen/CreditsScreen.gd" id="1_cyvqq"]
-[ext_resource type="Texture2D" uid="uid://uuv08tg3qcj5" path="res://screens/CreditsScreen/space_garden_endscreen.png" id="2_mukfy"]
-[ext_resource type="LabelSettings" uid="uid://ccrc5drs0nt3v" path="res://gui/titles_1.tres" id="3_ho27y"]
-[ext_resource type="LabelSettings" uid="uid://ditbrm271efp8" path="res://gui/label_settings_medium.tres" id="4_goqij"]
-[ext_resource type="FontFile" uid="uid://b2jbl0piinbrn" path="res://assets/fonts/MunroSmall-wPZw.ttf" id="5_qdyo1"]
+[ext_resource type="Texture2D" uid="uid://ddnplvblpwt13" path="res://assets/backgrounds/hell.png" id="2_lb5dx"]
+[ext_resource type="Texture2D" uid="uid://cltdg4jmq3rgm" path="res://screens/OutroScreen/back_button.png" id="3_pb13q"]
+[ext_resource type="Texture2D" uid="uid://3qcpj2qh22rq" path="res://screens/OutroScreen/back_button_hover.png" id="4_f383i"]
+[ext_resource type="Texture2D" uid="uid://1xjjr1iu6b6t" path="res://screens/OutroScreen/demon-dayz-credits.png" id="5_6ffx2"]
 
 [node name="CreditsScreen" type="Node2D"]
 script = ExtResource("1_cyvqq")
 metadata/_edit_vertical_guides_ = [480.0]
 metadata/_edit_horizontal_guides_ = [270.0]
 
-[node name="SpaceGardenEndscreen" type="Sprite2D" parent="."]
-texture = ExtResource("2_mukfy")
+[node name="Hell" type="Sprite2D" parent="."]
+texture = ExtResource("2_lb5dx")
 centered = false
+metadata/_edit_lock_ = true
 
-[node name="CodeCredits" type="Node2D" parent="."]
-visible = false
-position = Vector2(0, 113)
+[node name="BackButton" type="TextureButton" parent="."]
+offset_left = 397.0
+offset_top = 20.0
+offset_right = 461.0
+offset_bottom = 52.0
+texture_normal = ExtResource("3_pb13q")
+texture_pressed = ExtResource("4_f383i")
+texture_hover = ExtResource("4_f383i")
+texture_disabled = ExtResource("3_pb13q")
+texture_focused = ExtResource("4_f383i")
 
-[node name="Code" type="Label" parent="CodeCredits"]
-offset_left = 52.0
-offset_top = 43.0
-offset_right = 181.0
-offset_bottom = 134.0
-text = "Code"
-label_settings = ExtResource("3_ho27y")
-
-[node name="Ntimi Schnütgen" type="Label" parent="CodeCredits"]
-offset_left = 57.0
-offset_top = 115.0
-offset_right = 266.0
-offset_bottom = 162.0
-text = "Ntimi Schnütgen
-"
-label_settings = ExtResource("4_goqij")
-
-[node name="Characters and World" type="Node2D" parent="."]
-visible = false
-position = Vector2(0, 2)
-
-[node name="Characters and World" type="Label" parent="Characters and World"]
-offset_left = 52.0
-offset_top = 43.0
-offset_right = 181.0
-offset_bottom = 134.0
-text = "Character and World Design"
-label_settings = ExtResource("3_ho27y")
-
-[node name="Hendrik Schnütgen" type="Label" parent="Characters and World"]
-offset_left = 57.0
-offset_top = 115.0
-offset_right = 266.0
-offset_bottom = 162.0
-text = "Hendrik Schnütgen
-"
-label_settings = ExtResource("4_goqij")
-
-[node name="Music" type="Node2D" parent="."]
-visible = false
-position = Vector2(0, 234)
-
-[node name="Music" type="Label" parent="Music"]
-offset_left = 52.0
-offset_top = 43.0
-offset_right = 181.0
-offset_bottom = 134.0
-text = "Music"
-label_settings = ExtResource("3_ho27y")
-
-[node name="Stefan Hofer" type="Label" parent="Music"]
-offset_left = 57.0
-offset_top = 115.0
-offset_right = 266.0
-offset_bottom = 162.0
-text = "Stefan Hofer
-"
-label_settings = ExtResource("4_goqij")
-
-[node name="BackButton" type="Button" parent="."]
-offset_left = 377.0
-offset_top = 234.0
-offset_right = 462.0
-offset_bottom = 255.0
-theme_override_fonts/font = ExtResource("5_qdyo1")
-theme_override_font_sizes/font_size = 10
-text = "Back to Start"
+[node name="Demon-dayz-credits" type="Sprite2D" parent="."]
+texture = ExtResource("5_6ffx2")
+centered = false
 
 [connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]

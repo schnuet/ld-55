@@ -1,11 +1,25 @@
-[gd_scene load_steps=10 format=3 uid="uid://fbk1capf22s7"]
+[gd_scene load_steps=24 format=3 uid="uid://fbk1capf22s7"]
 
 [ext_resource type="Script" path="res://scenes/MainScene/MainScene.gd" id="1_ggjwf"]
-[ext_resource type="Texture2D" uid="uid://e3ibtnj643vl" path="res://assets/backgrounds/bg_2.png" id="2_fcsbu"]
-[ext_resource type="Texture2D" uid="uid://b78daenxgbfnt" path="res://assets/backgrounds/image_v1.png" id="2_mcxpb"]
+[ext_resource type="Texture2D" uid="uid://ddnplvblpwt13" path="res://assets/backgrounds/hell.png" id="2_5ye03"]
 [ext_resource type="PackedScene" uid="uid://cmohkqk14hjpa" path="res://actors/Player.tscn" id="2_ybnci"]
+[ext_resource type="Texture2D" uid="uid://lwj4qrorqrac" path="res://assets/backgrounds/schloss_hintergrund_2.png" id="3_b2fih"]
+[ext_resource type="Texture2D" uid="uid://cx2jwxr06ddle" path="res://assets/backgrounds/schloss_hintergrund1.png" id="4_3rvpi"]
 [ext_resource type="Texture2D" uid="uid://fnsw07teu6ot" path="res://assets/ui/summoning_Levelup_menu.png" id="5_24bfk"]
+[ext_resource type="Texture2D" uid="uid://dvt7t3s48c2qq" path="res://assets/backgrounds/stadt_hintergrund_2.png" id="5_mpaos"]
+[ext_resource type="Texture2D" uid="uid://c3g0ddkt2ystc" path="res://assets/backgrounds/stadt_hintergrund_1.png" id="6_l2bm8"]
 [ext_resource type="Texture2D" uid="uid://dqvgxidg7mk58" path="res://assets/ui/hover_powerup.png" id="6_o8na3"]
+[ext_resource type="Texture2D" uid="uid://cbqludbi5wi3c" path="res://assets/backgrounds/dorf_hintergrund_2.png" id="7_e0rvx"]
+[ext_resource type="Texture2D" uid="uid://b1rqyd4d3ksu5" path="res://assets/backgrounds/dorf_vordergrund.png" id="7_pa0xx"]
+[ext_resource type="Texture2D" uid="uid://cunvy0urqwkiv" path="res://assets/backgrounds/boss_hintergrund.png" id="8_6rtxt"]
+[ext_resource type="Texture2D" uid="uid://bnrunousph44p" path="res://assets/backgrounds/dorf_hintergrund_1.png" id="8_bi6rr"]
+[ext_resource type="Texture2D" uid="uid://csh0ki2u6jtis" path="res://assets/backgrounds/stadt_vordergrund.png" id="11_726h3"]
+[ext_resource type="Texture2D" uid="uid://c3hrvoojhqhsq" path="res://assets/backgrounds/schloss_vordergrund.png" id="12_pbajy"]
+[ext_resource type="Texture2D" uid="uid://cxvvsshkatuv4" path="res://assets/titles/village_levelname.png" id="14_bouf1"]
+[ext_resource type="Texture2D" uid="uid://c8fp20dwa0vwi" path="res://assets/titles/streets_levelname.png" id="15_h5e8e"]
+[ext_resource type="Texture2D" uid="uid://do22rbxym7qs1" path="res://assets/titles/castle_levelname.png" id="16_8r7j8"]
+[ext_resource type="Texture2D" uid="uid://dlgth8asrnpuw" path="res://assets/titles/boss_fight_levelname.png" id="17_t7vq2"]
+[ext_resource type="Texture2D" uid="uid://dt5i2qdnelqyu" path="res://assets/titles/sterbe_meldung.png" id="18_q4fab"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_v3ecc"]
 vertices = PackedVector2Array(539, 223, -85, 223, -85, 121, 539, 121)
@@ -25,22 +39,52 @@ metadata/_edit_vertical_guides_ = [480.0]
 metadata/_edit_horizontal_guides_ = [270.0]
 metadata/_edit_lock_ = true
 
-[node name="Bg2" type="Sprite2D" parent="."]
+[node name="bg_0" type="Sprite2D" parent="."]
 visible = false
-texture = ExtResource("2_fcsbu")
+texture = ExtResource("2_5ye03")
 centered = false
 metadata/_edit_lock_ = true
 
-[node name="ImageV1" type="Sprite2D" parent="."]
-texture = ExtResource("2_mcxpb")
+[node name="bg_1" type="Sprite2D" parent="."]
+texture = ExtResource("8_bi6rr")
 centered = false
+metadata/_edit_lock_ = true
 
-[node name="BossButton" type="Button" parent="."]
-offset_left = 20.0
-offset_top = 17.0
-offset_right = 85.0
-offset_bottom = 48.0
-text = "BOSS"
+[node name="bg_2" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("7_e0rvx")
+centered = false
+metadata/_edit_lock_ = true
+
+[node name="bg_3" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("6_l2bm8")
+centered = false
+metadata/_edit_lock_ = true
+
+[node name="bg_4" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("5_mpaos")
+centered = false
+metadata/_edit_lock_ = true
+
+[node name="bg_5" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("4_3rvpi")
+centered = false
+metadata/_edit_lock_ = true
+
+[node name="bg_6" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("3_b2fih")
+centered = false
+metadata/_edit_lock_ = true
+
+[node name="bg_7" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("8_6rtxt")
+centered = false
+metadata/_edit_lock_ = true
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 y_sort_enabled = true
@@ -89,34 +133,85 @@ collision_mask = 512
 position = Vector2(0, 176.5)
 shape = SubResource("RectangleShape2D_onrop")
 
+[node name="fg_1" type="Sprite2D" parent="."]
+texture = ExtResource("7_pa0xx")
+centered = false
+
+[node name="fg_2" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("11_726h3")
+centered = false
+
+[node name="fg_3" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("12_pbajy")
+centered = false
+
+[node name="title_1" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("14_bouf1")
+centered = false
+
+[node name="title_2" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("15_h5e8e")
+centered = false
+
+[node name="title_3" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("16_8r7j8")
+centered = false
+
+[node name="title_4" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("17_t7vq2")
+centered = false
+
+[node name="title_death" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("18_q4fab")
+centered = false
+
 [node name="card" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(240, 135)
 texture = ExtResource("5_24bfk")
 
 [node name="button_health" type="TextureButton" parent="card"]
-offset_left = -146.0
+offset_left = -131.0
 offset_top = 19.0
-offset_right = -46.0
+offset_right = -22.0
 offset_bottom = 69.0
 texture_pressed = ExtResource("6_o8na3")
 texture_hover = ExtResource("6_o8na3")
+texture_focused = ExtResource("6_o8na3")
+stretch_mode = 3
 
 [node name="button_damage" type="TextureButton" parent="card"]
 auto_translate_mode = 1
-offset_left = -51.0
+offset_left = 3.0
 offset_top = 17.0
-offset_right = 49.0
+offset_right = 121.0
 offset_bottom = 67.0
 texture_pressed = ExtResource("6_o8na3")
 texture_hover = ExtResource("6_o8na3")
+texture_focused = ExtResource("6_o8na3")
+stretch_mode = 3
 
 [node name="button_healing" type="TextureButton" parent="card"]
 auto_translate_mode = 1
-offset_left = 52.0
-offset_top = 17.0
-offset_right = 152.0
-offset_bottom = 67.0
+offset_left = 805.0
+offset_top = -315.0
+offset_right = 905.0
+offset_bottom = -265.0
 texture_pressed = ExtResource("6_o8na3")
 texture_hover = ExtResource("6_o8na3")
+texture_focused = ExtResource("6_o8na3")
 
-[connection signal="pressed" from="BossButton" to="." method="_on_boss_button_pressed"]
+[node name="black" type="ColorRect" parent="."]
+visible = false
+offset_left = -11.0
+offset_top = -3.0
+offset_right = 503.0
+offset_bottom = 274.0
+color = Color(0, 0, 0, 1)

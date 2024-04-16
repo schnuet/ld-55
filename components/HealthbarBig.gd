@@ -13,7 +13,8 @@ func _process(delta: float) -> void:
 	
 	# reposition
 	global_position.x = 9;
-	global_position.y = SCREEN_HEIGHT - size.y - 9;
+	global_position.y = 9;
+	#global_position.y = SCREEN_HEIGHT - size.y - 9;
 	
 	if "max_health" in parent:
 		max_value = parent.max_health;

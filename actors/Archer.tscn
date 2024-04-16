@@ -1,8 +1,9 @@
-[gd_scene load_steps=24 format=3 uid="uid://cyesgx3xpae5m"]
+[gd_scene load_steps=25 format=3 uid="uid://cyesgx3xpae5m"]
 
 [ext_resource type="Script" path="res://actors/Archer/Archer.gd" id="1_kyekx"]
 [ext_resource type="PackedScene" uid="uid://vsri3xpqpwt3" path="res://components/Healthbar.tscn" id="2_axv06"]
 [ext_resource type="PackedScene" uid="uid://cgfiwncqo8c8" path="res://components/Hitbox.tscn" id="3_umboi"]
+[ext_resource type="Texture2D" uid="uid://cnym4cucr4s18" path="res://actors/Archer/Archer-hurt.png" id="4_68i7k"]
 [ext_resource type="Texture2D" uid="uid://bnieo6gw041o8" path="res://actors/Archer/Archer-idle.png" id="4_vyuw4"]
 [ext_resource type="Texture2D" uid="uid://8tqlvw5v2wmu" path="res://actors/Archer/Archer_run.png" id="5_yygdq"]
 [ext_resource type="Texture2D" uid="uid://d3ecgvhnkmjqi" path="res://actors/Archer/Archer-shoot.png" id="6_mk05p"]
@@ -67,6 +68,14 @@ region = Rect2(128, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_o7154"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_68i7k")
+}],
+"loop": true,
+"name": &"hurt",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_7sk4n")
@@ -163,7 +172,7 @@ autostart = true
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_o7154")
-animation = &"idle"
+animation = &"hurt"
 
 [node name="State" parent="." instance=ExtResource("8_so8f8")]
 visible = false

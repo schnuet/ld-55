@@ -36,4 +36,4 @@ func remove_hurtbox(hurtbox: Area2D):
 
 func _on_hurtbox_activate(hurtbox: Area2D):
 	var hurtbox_parent = hurtbox.get_parent();
-	emit_signal("hit", hurtbox.damage, hurtbox_parent);
+	hit.emit(hurtbox.damage, hurtbox_parent);

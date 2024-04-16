@@ -1,20 +1,59 @@
-[gd_scene load_steps=3 format=3 uid="uid://b4l1gsiq7jq67"]
+[gd_scene load_steps=6 format=3 uid="uid://b4l1gsiq7jq67"]
 
 [ext_resource type="Script" path="res://screens/OutroScreen/OutroScreen.gd" id="1_h6cjc"]
-[ext_resource type="FontFile" uid="uid://b2jbl0piinbrn" path="res://assets/fonts/MunroSmall-wPZw.ttf" id="2_no50f"]
+[ext_resource type="Texture2D" uid="uid://ddnplvblpwt13" path="res://assets/backgrounds/hell.png" id="2_pjxsx"]
+[ext_resource type="Texture2D" uid="uid://fnsw07teu6ot" path="res://assets/ui/summoning_Levelup_menu.png" id="5_amert"]
+[ext_resource type="Texture2D" uid="uid://1xjjr1iu6b6t" path="res://screens/OutroScreen/demon-dayz-credits.png" id="5_pq0sr"]
+[ext_resource type="Texture2D" uid="uid://dqvgxidg7mk58" path="res://assets/ui/hover_powerup.png" id="6_od8vv"]
 
 [node name="OutroScreen" type="Node2D"]
 script = ExtResource("1_h6cjc")
 metadata/_edit_vertical_guides_ = [480.0]
 metadata/_edit_horizontal_guides_ = [270.0]
 
-[node name="SkipButton" type="Button" parent="."]
-offset_left = 410.0
-offset_top = 18.0
-offset_right = 462.0
-offset_bottom = 39.0
-theme_override_fonts/font = ExtResource("2_no50f")
-theme_override_font_sizes/font_size = 10
-text = "Skip"
+[node name="Hell" type="Sprite2D" parent="."]
+texture = ExtResource("2_pjxsx")
+centered = false
+metadata/_edit_lock_ = true
 
-[connection signal="pressed" from="SkipButton" to="." method="_on_back_button_pressed"]
+[node name="card" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("5_amert")
+centered = false
+
+[node name="button_health" type="TextureButton" parent="card"]
+auto_translate_mode = 1
+offset_left = -131.0
+offset_top = 19.0
+offset_right = -22.0
+offset_bottom = 69.0
+texture_pressed = ExtResource("6_od8vv")
+texture_hover = ExtResource("6_od8vv")
+texture_focused = ExtResource("6_od8vv")
+stretch_mode = 3
+
+[node name="button_damage" type="TextureButton" parent="card"]
+auto_translate_mode = 1
+offset_left = 3.0
+offset_top = 17.0
+offset_right = 121.0
+offset_bottom = 67.0
+texture_pressed = ExtResource("6_od8vv")
+texture_hover = ExtResource("6_od8vv")
+texture_focused = ExtResource("6_od8vv")
+stretch_mode = 3
+
+[node name="button_healing" type="TextureButton" parent="card"]
+auto_translate_mode = 1
+offset_left = 805.0
+offset_top = -315.0
+offset_right = 905.0
+offset_bottom = -265.0
+texture_pressed = ExtResource("6_od8vv")
+texture_hover = ExtResource("6_od8vv")
+texture_focused = ExtResource("6_od8vv")
+
+[node name="Credits" type="Sprite2D" parent="."]
+position = Vector2(0, 270)
+texture = ExtResource("5_pq0sr")
+centered = false

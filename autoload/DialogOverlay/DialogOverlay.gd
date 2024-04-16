@@ -4,8 +4,8 @@ var timer = null;
 var tween = null;
 
 @onready var char_boxes = {
-	"chef": $chef,
-	"prof": $prof
+	"demon": $demon,
+	"lich": $lich
 };
 
 @onready var box = null;
@@ -15,14 +15,23 @@ var tween = null;
 @onready var backdrop = $Backdrop;
 
 var open_dialogue = false;
+var period = null;
 var skip = false;
+
+var period_in = false;
 
 func _ready():
 	backdrop.hide();
 	hide_all_char_boxes();
 	$SkipButton.hide();
 
-func do_dialog(lines: Array, scene_to_pause: Node = null):
+func _process(delta: float) -> void:
+	if Input.is_action_just_released("ui_accept"):
+		accept_line();
+	if Input.is_action_just_released("ui_cancel"):
+		skip_dialog();
+
+func do_dialog(lines: Array, skippable = true, scene_to_pause: Node = null):
 	move_to_front();
 	if scene_to_pause:
 		scene_to_pause.process_mode = Node.PROCESS_MODE_DISABLED;
@@ -32,7 +41,8 @@ func do_dialog(lines: Array, scene_to_pause: Node = null):
 	await Game.wait(0.75);
 	
 	skip = false;
-	$SkipButton.show();
+	if skippable:
+		$SkipButton.show();
 	
 	print("visible", speech_box);
 	
@@ -42,6 +52,10 @@ func do_dialog(lines: Array, scene_to_pause: Node = null):
 
 		var char_box = get_char_box(line.get("actor"));
 		await switch_box(char_box);
+		
+		if line.has("mood"):
+			var p = char_box.get_node("Portrait");
+			p.animation = line.get("mood");
 		
 		if line.get("type") == "line":
 			await update_speech(line);
@@ -66,12 +80,14 @@ func switch_box(new_box):
 		
 	box = new_box;
 	panel = box.get_node("Panel");
+	period = box.get_node("period");
 	speech_box = panel.get_node("Speech");
 	speech_box.text = "";
 	portrait = box.get_node("Portrait");
 	await show_box(box);
 
 func update_speech(line):
+	period.hide();
 	var texts = line.get("lines");
 	speech_box.visible_characters = 0;
 	speech_box.text = "";
@@ -84,7 +100,13 @@ func update_speech(line):
 	for text in texts:
 		if skip == true:
 			return;
-			
+		
+		if text.begins_with("#wait:"):
+			var seconds = text.to_float();
+			print("wait ", seconds, " seconds");
+			await Game.wait(seconds);
+			continue;
+		
 		print("next line!");
 		$Dialog.playing = true;
 		var old_text_length = len(speech_box.text);
@@ -106,6 +128,7 @@ func update_speech(line):
 		return;
 	
 	timer = get_tree().create_timer(len(speech_box.text) * 0.2);
+	fade_period_in();
 	await timer.timeout
 
 func show_box(box_to_show):
@@ -114,9 +137,10 @@ func show_box(box_to_show):
 	if box_to_show.visible == true:
 		return;
 	$Text_bubble.play();
+	period.hide();
 	box_to_show.show();
 	
-	#animate potrait
+	#animate portrait
 	var p_final_x = portrait.position.x;
 	if portrait.position.x < 640:
 		portrait.position.x -= 40;
@@ -164,15 +188,24 @@ func hide_backdrop():
 	_tween.tween_callback(backdrop.hide);
 
 func _unhandled_input(event):
-	if event is InputEventMouseButton and event.is_pressed():
-		if timer != null and timer.time_left > 0:
-			timer.time_left = 0.0001;
-		elif tween != null and tween.is_running():
-			tween.stop();
-			tween.emit_signal("finished");
+	if (
+		event is InputEventMouseButton and event.is_pressed()
+	) or (
+		event.is_action("ui_accept")
+	):
+		accept_line();
 
+func accept_line():
+	if timer != null and timer.time_left > 0:
+		timer.time_left = 0.0001;
+	elif tween != null and tween.is_running():
+		tween.stop();
+		tween.emit_signal("finished");
 
 func _on_skip_button_pressed():
+	skip_dialog();
+
+func skip_dialog():
 	skip = true;
 	
 	if timer != null and timer.time_left > 0:
@@ -185,3 +218,24 @@ func _on_skip_button_pressed():
 func _on_dialog_finished():
 	if open_dialogue:
 		$Dialog.play();
+
+func fade_period_in():
+	if period == null:
+		return;
+	
+	period.show();
+	var tween = get_tree().create_tween();
+	tween.set_ease(tween.EASE_OUT);
+	tween.tween_property(period, "modulate", Color.WHITE, 0.4);
+	tween.connect("finished", _on_period_in);
+
+func _on_period_in():
+	if period != null:
+		var tween = get_tree().create_tween();
+		tween.set_ease(tween.EASE_OUT);
+		tween.tween_property(period, "modulate", Color.TRANSPARENT, 0.4);
+		tween.connect("finished", _on_period_out);
+
+func _on_period_out():
+	if period != null and period.visible:
+		fade_period_in();

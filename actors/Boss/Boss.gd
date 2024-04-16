@@ -5,8 +5,8 @@ signal dead;
 const SPEED: float = 40;
 const FRICTION = 0.20;
 
-var max_health: float = 25;
-var health: float = 25;
+var max_health: float = 40;
+var health: float = 40;
 
 var damage = 5;
 
@@ -129,6 +129,7 @@ var attack_has_hit = false;
 func _enter_attack():
 	jump_target_pos = null;
 	animated_sprite.play("attack");
+	$snd_stomp.play();
 	hit(damage);
 	var attack_move = (get_player_position() - global_position).normalized();
 	velocity = attack_move * 600;

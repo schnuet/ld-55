@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dpfblxrfa5vxl"]
+[gd_scene load_steps=25 format=3 uid="uid://dpfblxrfa5vxl"]
 
 [ext_resource type="Script" path="res://actors/Boss/Boss.gd" id="1_m0l7u"]
 [ext_resource type="PackedScene" uid="uid://cwrmepudr76r" path="res://components/HealthbarBig.tscn" id="2_oyg1e"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://btygwd3ueufow" path="res://components/HurtBox.tscn" id="4_tnbxa"]
 [ext_resource type="PackedScene" uid="uid://ccl80evewkl4w" path="res://components/State.tscn" id="5_s7ur8"]
 [ext_resource type="Texture2D" uid="uid://qxv0fdxog7rk" path="res://actors/Boss/endboss_sprungangriff.png" id="5_x0rd2"]
+[ext_resource type="AudioStream" uid="uid://5nj0v8nt62h4" path="res://actors/Boss/endboss_stomp.ogg" id="7_0h2c2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g02ir"]
 size = Vector2(42, 15)
@@ -179,3 +180,6 @@ animation = &"crouch"
 [node name="State" parent="." instance=ExtResource("5_s7ur8")]
 visible = false
 position = Vector2(0, -81)
+
+[node name="snd_stomp" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_0h2c2")

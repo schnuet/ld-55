@@ -1,9 +1,11 @@
-[gd_scene load_steps=27 format=3 uid="uid://cek8ngnsjvhp3"]
+[gd_scene load_steps=29 format=3 uid="uid://cek8ngnsjvhp3"]
 
 [ext_resource type="Script" path="res://actors/Grunt/Grunt.gd" id="1_1sl5w"]
 [ext_resource type="PackedScene" uid="uid://cgfiwncqo8c8" path="res://components/Hitbox.tscn" id="2_bcp7d"]
 [ext_resource type="PackedScene" uid="uid://vsri3xpqpwt3" path="res://components/Healthbar.tscn" id="2_teoto"]
 [ext_resource type="PackedScene" uid="uid://btygwd3ueufow" path="res://components/HurtBox.tscn" id="3_kcjmj"]
+[ext_resource type="PackedScene" uid="uid://ccl80evewkl4w" path="res://components/State.tscn" id="5_81rn1"]
+[ext_resource type="Texture2D" uid="uid://u2kinlat7tjy" path="res://actors/Grunt/Bauer-hurt.png" id="6_h1fbl"]
 [ext_resource type="Texture2D" uid="uid://dosrnf4qq314a" path="res://actors/Grunt/Bauer-idle.png" id="6_jhu4v"]
 [ext_resource type="Texture2D" uid="uid://nh1luf0p30as" path="res://actors/Grunt/Bauer-attack.png" id="6_xcvs4"]
 [ext_resource type="Texture2D" uid="uid://b0y8ejey26ofl" path="res://actors/Grunt/Bauer-run.png" id="7_rugw8"]
@@ -102,6 +104,14 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("6_h1fbl")
+}],
+"loop": true,
+"name": &"hurt",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("6_jhu4v")
 }],
 "loop": true,
@@ -196,4 +206,8 @@ polygon = PackedVector2Array(-10, 0, -9, -4, -7, -7, -4, -9, 0, -10, 4, -9, 7, -
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(1, -11)
 sprite_frames = SubResource("SpriteFrames_64fn6")
-animation = &"attack"
+animation = &"hurt"
+
+[node name="State" parent="." instance=ExtResource("5_81rn1")]
+visible = false
+position = Vector2(0, -29)

@@ -1,29 +1,134 @@
-[gd_scene load_steps=7 format=3 uid="uid://cr3xssk1bdp5u"]
+[gd_scene load_steps=25 format=3 uid="uid://cr3xssk1bdp5u"]
 
 [ext_resource type="Script" path="res://autoload/DialogOverlay/DialogOverlay.gd" id="1_r3xnr"]
-[ext_resource type="Texture2D" uid="uid://vx504hxoffk6" path="res://autoload/DialogOverlay/portrait_2.png" id="2_8q5f7"]
-[ext_resource type="Texture2D" uid="uid://tlhush64wg5d" path="res://autoload/DialogOverlay/portrait_1.png" id="2_lashl"]
+[ext_resource type="Texture2D" uid="uid://drxkio4fycb0k" path="res://assets/portraits/demon.png" id="2_o5yph"]
+[ext_resource type="Texture2D" uid="uid://uwb6yewwnwxk" path="res://assets/ui/textbox_demon.png" id="3_fc5gm"]
+[ext_resource type="Texture2D" uid="uid://goafsnkw8iuc" path="res://assets/portraits/lich.png" id="3_qi3wf"]
 [ext_resource type="AudioStream" uid="uid://t0r27aioflcr" path="res://autoload/DialogOverlay/dialog.wav" id="4_4d7va"]
 [ext_resource type="AudioStream" uid="uid://hmidyqe0mm2j" path="res://autoload/DialogOverlay/text-bubble-geht-auf.wav" id="5_11emc"]
+[ext_resource type="Texture2D" uid="uid://c6kviyjr41sew" path="res://assets/ui/textbox_lich.png" id="6_56r7i"]
+[ext_resource type="Texture2D" uid="uid://bjnebm5sxaxpj" path="res://assets/ui/skip_button.png" id="6_fvmio"]
+[ext_resource type="FontFile" uid="uid://yxsqftdvfn6h" path="res://assets/ui/Munro-2LYe.ttf" id="7_jaf4f"]
+[ext_resource type="Texture2D" uid="uid://dql1gp45tksrf" path="res://assets/ui/skip_button_hover.png" id="7_mnrd8"]
+[ext_resource type="FontFile" uid="uid://yxsqftdvfn6h" path="res://assets/ui/Munro-2LYe.ttf" id="7_xbc4w"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u0cfh"]
+atlas = ExtResource("2_o5yph")
+region = Rect2(5000, 0, 500, 270)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ppnjo"]
+atlas = ExtResource("2_o5yph")
+region = Rect2(500, 0, 500, 270)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ae6k1"]
+atlas = ExtResource("2_o5yph")
+region = Rect2(0, 0, 500, 270)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vtlic"]
+atlas = ExtResource("2_o5yph")
+region = Rect2(2500, 0, 500, 270)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2hnjw"]
+atlas = ExtResource("2_o5yph")
+region = Rect2(4000, 0, 500, 270)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gr71s"]
+atlas = ExtResource("2_o5yph")
+region = Rect2(1000, 0, 500, 270)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pj4n8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u0cfh")
+}],
+"loop": true,
+"name": &"angry",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ppnjo")
+}],
+"loop": true,
+"name": &"halfsmile",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ae6k1")
+}],
+"loop": true,
+"name": &"happy",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vtlic")
+}],
+"loop": true,
+"name": &"hehe",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2hnjw")
+}],
+"loop": true,
+"name": &"shocked",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gr71s")
+}],
+"loop": true,
+"name": &"unhappy",
+"speed": 5.0
+}]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mutt3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eif56"]
+atlas = ExtResource("3_qi3wf")
+region = Rect2(300, 0, 300, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_380xv"]
+atlas = ExtResource("3_qi3wf")
+region = Rect2(600, 0, 300, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4q7t2"]
+atlas = ExtResource("3_qi3wf")
+region = Rect2(0, 0, 300, 200)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ssckm"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_lashl")
+"texture": SubResource("AtlasTexture_eif56")
 }],
 "loop": true,
-"name": &"chef",
+"name": &"angry",
 "speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": null
+"texture": SubResource("AtlasTexture_380xv")
 }],
 "loop": true,
-"name": &"scream",
+"name": &"happy",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4q7t2")
+}],
+"loop": true,
+"name": &"neutral",
 "speed": 5.0
 }]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ffod4"]
 
 [node name="DialogOverlay" type="Control"]
 process_mode = 3
@@ -31,8 +136,8 @@ z_index = 10
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_r3xnr")
-metadata/_edit_horizontal_guides_ = [360.0]
-metadata/_edit_vertical_guides_ = [640.0]
+metadata/_edit_horizontal_guides_ = [270.0]
+metadata/_edit_vertical_guides_ = [480.0]
 
 [node name="Backdrop" type="ColorRect" parent="."]
 layout_mode = 0
@@ -41,65 +146,98 @@ offset_bottom = 441.0
 mouse_filter = 2
 color = Color(0, 0, 0, 0.192157)
 
-[node name="prof" type="Node2D" parent="."]
+[node name="demon" type="Node2D" parent="."]
 
-[node name="Portrait" type="Sprite2D" parent="prof"]
-position = Vector2(540, 243)
-scale = Vector2(2, 2)
-texture = ExtResource("2_8q5f7")
+[node name="Portrait" type="AnimatedSprite2D" parent="demon"]
+position = Vector2(493, 135)
+sprite_frames = SubResource("SpriteFrames_pj4n8")
+animation = &"hehe"
+flip_h = true
 
-[node name="Panel" type="Panel" parent="prof"]
+[node name="Panel" type="Panel" parent="demon"]
 offset_left = 17.0
-offset_top = 253.0
-offset_right = 487.0
-offset_bottom = 348.0
+offset_top = 164.0
+offset_right = 317.0
+offset_bottom = 259.0
 mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_mutt3")
 metadata/_edit_group_ = true
 
-[node name="Speech" type="Label" parent="prof/Panel"]
+[node name="TextboxDemon" type="Sprite2D" parent="demon/Panel"]
+position = Vector2(64, -37)
+texture = ExtResource("3_fc5gm")
+
+[node name="Speech" type="Label" parent="demon/Panel"]
 layout_mode = 0
-offset_left = 13.0
-offset_top = 10.0
-offset_right = 453.0
-offset_bottom = 84.0
+offset_left = 33.0
+offset_top = 40.0
+offset_right = 264.0
+offset_bottom = 79.0
+theme_override_colors/font_color = Color(0.46, 0.374057, 0.1886, 1)
+theme_override_constants/line_spacing = 0
+theme_override_fonts/font = ExtResource("7_xbc4w")
+theme_override_font_sizes/font_size = 10
 text = "This is a standard text!"
 autowrap_mode = 3
 visible_characters_behavior = 1
 
-[node name="chef" type="Node2D" parent="."]
+[node name="period" type="Polygon2D" parent="demon"]
+position = Vector2(279, 235)
+color = Color(0.384314, 0.298039, 0.192157, 1)
+polygon = PackedVector2Array(-4, -4, -4, 4, 4, 4, 4, -4)
+
+[node name="lich" type="Node2D" parent="."]
 visible = false
 
-[node name="Portrait" type="AnimatedSprite2D" parent="chef"]
-position = Vector2(92, 243)
-scale = Vector2(2, 2)
+[node name="Portrait" type="AnimatedSprite2D" parent="lich"]
+position = Vector2(77, 170)
 sprite_frames = SubResource("SpriteFrames_ssckm")
-animation = &"chef"
+animation = &"neutral"
 
-[node name="Panel" type="Panel" parent="chef"]
-offset_left = 148.0
-offset_top = 253.0
-offset_right = 618.0
-offset_bottom = 348.0
+[node name="Panel" type="Panel" parent="lich"]
+offset_left = 146.0
+offset_top = 168.0
+offset_right = 461.0
+offset_bottom = 251.0
 mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ffod4")
 metadata/_edit_group_ = true
 
-[node name="Speech" type="Label" parent="chef/Panel"]
+[node name="TextboxLich" type="Sprite2D" parent="lich/Panel"]
+position = Vector2(-169, -178)
+texture = ExtResource("6_56r7i")
+centered = false
+
+[node name="Speech" type="Label" parent="lich/Panel"]
 layout_mode = 0
-offset_left = 13.0
-offset_top = 10.0
-offset_right = 453.0
-offset_bottom = 84.0
-text = "This is a standard text!"
+offset_left = 40.0
+offset_top = 35.0
+offset_right = 270.0
+offset_bottom = 76.0
+theme_override_colors/font_color = Color(0.458824, 0.372549, 0.188235, 1)
+theme_override_constants/line_spacing = 0
+theme_override_fonts/font = ExtResource("7_jaf4f")
+theme_override_font_sizes/font_size = 10
+text = "COME ON DEMON. ONE LAST CONTRACT IS OPEN. ITS RAIDING TIME."
 autowrap_mode = 3
 visible_characters_behavior = 1
 
-[node name="SkipButton" type="Button" parent="."]
+[node name="period" type="Polygon2D" parent="lich"]
+position = Vector2(415, 234)
+color = Color(0.384314, 0.298039, 0.192157, 1)
+polygon = PackedVector2Array(-4, -4, -4, 4, 4, 4, 4, -4)
+
+[node name="SkipButton" type="TextureButton" parent="."]
 layout_mode = 0
-offset_left = 538.0
-offset_top = 17.0
-offset_right = 623.0
-offset_bottom = 48.0
-text = "Skip"
+offset_left = 396.0
+offset_top = 19.0
+offset_right = 460.0
+offset_bottom = 51.0
+texture_normal = ExtResource("6_fvmio")
+texture_pressed = ExtResource("7_mnrd8")
+texture_hover = ExtResource("7_mnrd8")
+texture_disabled = ExtResource("6_fvmio")
+texture_focused = ExtResource("7_mnrd8")
 
 [node name="Dialog" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_4d7va")

@@ -8,7 +8,7 @@ const FRICTION = 0.20;
 
 var max_health: float = 4;
 var health: float = 4;
-var damage = 1;
+var damage = 2;
 
 enum State {
 	CHASE,
@@ -69,7 +69,9 @@ func _enter_prepare():
 	await animated_sprite.frame_changed;
 	await animated_sprite.frame_changed;
 	await animated_sprite.frame_changed;
-	set_state(State.ATTACK);
+	
+	if state == State.PREPARE:
+		set_state(State.ATTACK);
 	
 func _update_prepare(_delta: float):
 	pass
@@ -81,7 +83,8 @@ func _update_prepare(_delta: float):
 func _enter_attack():
 	hit(damage);
 	await animated_sprite.animation_finished;
-	set_state(State.CHASE);
+	if state == State.ATTACK:
+		set_state(State.CHASE);
 
 func _update_attack(_delta: float):
 	pass
@@ -99,6 +102,7 @@ func hit(hit_strength: float = 1):
 
 func _enter_hurt():
 	print("hurt enter");
+	animated_sprite.play("hurt");
 	velocity = hurt_recoil_speed * 5;
 	
 	await Game.wait(0.5);
@@ -111,11 +115,11 @@ func _update_hurt(_delta):
 	move_and_slide();
 
 
-func _on_hit(damage: float, player: Node2D):
-	get_hit(damage, (global_position - player.global_position).normalized());
+func _on_hit(hit_damage: float, player: Node2D):
+	get_hit(hit_damage, (global_position - player.global_position).normalized());
 
-func get_hit(damage: float, direction: Vector2):
-	health = max(health - damage, 0);
+func get_hit(hit_damage: float, direction: Vector2):
+	health = max(health - hit_damage, 0);
 	hurt_recoil_speed = direction * 80;
 	set_state(State.HURT);
 	
@@ -126,12 +130,13 @@ func get_hit(damage: float, direction: Vector2):
 # DIE
 
 func _enter_die():
+	get_player().heal(1);
 	shadow.hide();
 	var tween = get_tree().create_tween();
 	var fade_duration = 1;
 	tween.tween_property(self, "modulate", Color.TRANSPARENT, fade_duration);
 	await tween.finished;
-	emit_signal("dead");
+	dead.emit();
 	queue_free();
 	
 func _update_die(_delta):

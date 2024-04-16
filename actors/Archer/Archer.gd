@@ -6,8 +6,8 @@ const SPEED: float = 80;
 const FRICTION = 0.20;
 #var velocity = Vector2.ZERO;
 
-var max_health: float = 2;
-var health: float = 2;
+var max_health: float = 4;
+var health: float = 4;
 
 var damage = 2;
 
@@ -91,6 +91,7 @@ func shoot(damage: float):
 	var new_arrow = ArcherArrow.instantiate();
 	new_arrow.global_position = global_position - Vector2(0, 30);
 	var player = get_player();
+	new_arrow.damage = damage;
 	new_arrow.target_position = player.global_position + player.velocity.limit_length(1) * 40;
 	get_parent().add_child(new_arrow);
 
@@ -98,6 +99,7 @@ func shoot(damage: float):
 # HURT
 
 func _enter_hurt():
+	animated_sprite.play("hurt");
 	print("hurt enter");
 	velocity = hurt_recoil_speed * 5;
 	
@@ -126,12 +128,13 @@ func get_hit(damage: float, direction: Vector2):
 # DIE
 
 func _enter_die():
+	get_player().heal(1);
 	shadow.hide();
 	var tween = get_tree().create_tween();
 	var fade_duration = 1;
 	tween.tween_property(self, "modulate", Color.TRANSPARENT, fade_duration);
 	await tween.finished;
-	emit_signal("dead");
+	dead.emit();
 	queue_free();
 	
 func _update_die(_delta):
@@ -152,8 +155,11 @@ func _update_chase(delta: float) -> void:
 		if !animated_sprite.is_playing():
 			animated_sprite.play();
 	
-	if navigation_agent.is_navigation_finished() or navigation_agent.distance_to_target() < 7:
-		if global_position.x > 20 and global_position.x < 470:
+	if (
+		(global_position.x > 80 and global_position.x < 400) and
+		navigation_agent.is_navigation_finished() or navigation_agent.distance_to_target() < 7
+	):
+		if global_position.x > 80 and global_position.x < 400:
 			set_state(State.PREPARE);
 		
 	var closest_player_position = get_player_position();

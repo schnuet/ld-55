@@ -10,9 +10,9 @@ config_version=5
 
 [application]
 
-config/name="Ludum Dare 55 - The Summoning"
+config/name="Demon Days"
 config/tags=PackedStringArray("ludum_dare")
-run/main_scene="res://scenes/MainScene/MainScene.tscn"
+run/main_scene="res://screens/StartScreen/StartScreen.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://space_garden_cover.png"
 

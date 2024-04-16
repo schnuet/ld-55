@@ -9,7 +9,7 @@ const FRICTION = 0.20;
 var max_health: float = 8;
 var health: float = 8;
 
-var damage = 2;
+var damage = 5;
 
 enum State {
 	CHASE,
@@ -98,6 +98,7 @@ func hit(hit_strength: float = 1):
 
 func _enter_hurt():
 	print("hurt enter");
+	animated_sprite.play("hurt");
 	velocity = hurt_recoil_speed * 5;
 	
 	await Game.wait(0.3);
@@ -129,12 +130,13 @@ func get_hit(damage: float, direction: Vector2):
 # DIE
 
 func _enter_die():
+	get_player().heal(1);
 	shadow.hide();
 	var tween = get_tree().create_tween();
 	var fade_duration = 1;
 	tween.tween_property(self, "modulate", Color.TRANSPARENT, fade_duration);
 	await tween.finished;
-	emit_signal("dead");
+	dead.emit();
 	queue_free();
 	
 func _update_die(_delta):
