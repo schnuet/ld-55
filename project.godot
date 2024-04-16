@@ -14,7 +14,7 @@ config/name="Demon Days"
 config/tags=PackedStringArray("ludum_dare")
 run/main_scene="res://screens/StartScreen/StartScreen.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
-config/icon="res://space_garden_cover.png"
+config/icon="res://cover_demon_dayz.png"
 
 [autoload]
 
@@ -111,3 +111,4 @@ dodge={
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+textures/vram_compression/import_etc2_astc=true
